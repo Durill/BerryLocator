@@ -1,5 +1,4 @@
-from enum import StrEnum
-
+from core import StrEnum
 
 __all__ = ("DeviceStatus",)
 

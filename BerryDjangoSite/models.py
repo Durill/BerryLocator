@@ -1,24 +1,15 @@
-from uuid import UUID
+from __future__ import annotations
 
 from django.db import models
 
-# from device import Device, DeviceStatus, DeviceKind
+
+__all__ = ("DeviceModel",)
 
 
 class DeviceModel(models.Model):
-    id = models.CharField()
+    id = models.CharField(primary_key=True)
     name = models.CharField(max_length=255)
     kind = models.CharField(max_length=255)
     bind_timestamp = models.DateTimeField()
     unbind_timestamp = models.DateTimeField()
     status = models.TextField()
-
-    # def to_domain(self) -> Device:
-    #     return Device(
-    #         id=UUID(str(self.id)),
-    #         name=str(self.name),
-    #         kind=DeviceKind(self.kind),
-    #         bind_timestamp=self.bind_timestamp,
-    #         unbind_timestamp=self.unbind_timestamp,
-    #         status=DeviceStatus(self.status),
-    #     )
