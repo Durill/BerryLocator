@@ -1,15 +1,15 @@
 from typing import Optional
 from uuid import UUID
 
-from BerryDjangoSite.models import DeviceModel
-from ..models import Device
-from .mappers import DeviceMapper
+from device import DeviceRepository
+from device.models import Device
+from device.repositories.mappers import DeviceMapper
 
 
 __all__ = ("DjangoDeviceRepository",)
 
 
-class DjangoDeviceRepository:
+class DjangoDeviceRepository(DeviceRepository):
 
     def create(self, device: Device) -> UUID:
         try:
@@ -21,7 +21,7 @@ class DjangoDeviceRepository:
 
     def get(self, device_id: UUID) -> Optional[Device]:
         try:
-            device = DeviceModel.objects.get(id=device_id)
+            device = self.__model__.objects.get(id=device_id)
             device = DeviceMapper.to_domain(device_model=device)
             return device if device else None
         except Exception as error:

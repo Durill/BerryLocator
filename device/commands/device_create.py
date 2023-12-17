@@ -1,6 +1,5 @@
 from datetime import datetime
 from uuid import UUID
-from re import match
 
 from device import DjangoDeviceRepository, Device, DeviceKind, DeviceStatus
 
@@ -16,27 +15,23 @@ class DeviceCreateCommand:
 
     def execute(
         self,
-        device_id: str,
+        device_id: UUID,
         device_name: str,
-        device_kind: str,
+        device_kind: DeviceKind,
     ) -> Device:
 
-        uuid_pattern = r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-        if not match(uuid_pattern, device_id):
-            print("** This shit is not UUID?! **")
-            raise Exception
-
-        if self.device_repository.get(device_id=UUID(device_id)) is not None:
+        if self.device_repository.get(device_id=device_id) is not None:
             print("This device has already been registered")
             raise Exception
 
         if device_kind not in DeviceKind.all_values():
             print("** What kind of shit is this? **")
+            raise Exception
 
         device = Device(
-            id=UUID(device_id),
+            id=device_id,
             name=device_name,
-            kind=DeviceKind(device_kind),
+            kind=device_kind,
             status=DeviceStatus.NOT_VERIFIED,
             bind_timestamp=datetime.now(),
         )

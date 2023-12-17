@@ -1,4 +1,5 @@
 import re
+from uuid import UUID
 
 from django.http import JsonResponse
 from rest_framework import status
@@ -23,7 +24,7 @@ def register_device(request):
 
     try:
         device.execute(
-            device_id=device_id,
+            device_id=UUID(device_id),
             device_name=device_name,
             device_kind=DeviceKind(device_kind),
         )
