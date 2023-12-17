@@ -5,10 +5,10 @@ from uuid import UUID
 from BerryDjangoSite.models import DeviceModel
 from device import Device
 
-__all__ = ("DeviceRepository",)
+__all__ = ("IDeviceRepository",)
 
 
-class DeviceRepository(ABC):
+class IDeviceRepository(ABC):
     __model__ = DeviceModel
 
     @abstractmethod

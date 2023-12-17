@@ -1,7 +1,7 @@
 from typing import Optional
 from uuid import UUID
 
-from device import DeviceRepository
+from device import IDeviceRepository
 from device.models import Device
 from device.repositories.mappers import DeviceMapper
 
@@ -9,7 +9,7 @@ from device.repositories.mappers import DeviceMapper
 __all__ = ("DjangoDeviceRepository",)
 
 
-class DjangoDeviceRepository(DeviceRepository):
+class DjangoDeviceRepository(IDeviceRepository):
 
     def create(self, device: Device) -> UUID:
         try:
