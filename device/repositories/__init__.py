@@ -1,2 +1,3 @@
-from .repository import *
+from .postgres import *
 from .mappers import *
+from .interface import *

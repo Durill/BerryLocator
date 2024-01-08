@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 from uuid import UUID
 from dataclasses import dataclass
 from ..value_objects import DeviceKind, DeviceStatus
@@ -14,7 +15,7 @@ class Device:
     name: str
     kind: DeviceKind
 
-    bind_timestamp: datetime
-    unbind_timestamp: datetime
+    status: DeviceStatus
 
-    status: DeviceStatus = DeviceStatus.CONNECTED
+    bind_timestamp: datetime
+    unbind_timestamp: Optional[datetime] = None

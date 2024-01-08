@@ -12,8 +12,11 @@ RUN pip install -r requirements.txt
 
 COPY ./.env* /.env
 COPY ./compose/set_env /set_env
+RUN chmod +x /set_env
 COPY ./compose/django/start /start
+RUN chmod +x /start
 COPY ./compose/django/entrypoint /entrypoint
+RUN chmod +x /entrypoint
 
 ENTRYPOINT ["/entrypoint"]
 CMD ["/start"]
