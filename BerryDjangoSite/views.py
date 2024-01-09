@@ -10,3 +10,7 @@ __all__ = (
 
 def index(request):
     return render(request=request, template_name="home.html")
+
+
+def create_user(request):
+    pass
