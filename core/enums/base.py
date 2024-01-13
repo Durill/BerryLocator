@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Set, TypeVar, Type, KeysView, ItemsView
+from typing import Set, TypeVar, Type, ItemsView
 
 
 __all__ = ("StrEnum",)

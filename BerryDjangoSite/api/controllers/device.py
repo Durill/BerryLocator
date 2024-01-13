@@ -1,15 +1,13 @@
-import re
 from uuid import UUID
 
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view
+from device import DeviceKind, DjangoDeviceRepository, DeviceCreateCommand
 
 __all__ = (
     "register_device",
 )
-
-from device import DeviceKind, DeviceCreateCommand, DjangoDeviceRepository
 
 
 @api_view(http_method_names=['POST'])

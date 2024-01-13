@@ -1,7 +1,8 @@
 from datetime import datetime
 from uuid import UUID
 
-from device import DjangoDeviceRepository, Device, DeviceKind, DeviceStatus
+from ..models import Device, DeviceKind, DeviceStatus
+from ..repositories import DjangoDeviceRepository
 
 __all__ = ("DeviceCreateCommand",)
 

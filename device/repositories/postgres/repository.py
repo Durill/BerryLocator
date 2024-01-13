@@ -1,9 +1,9 @@
 from typing import Optional
 from uuid import UUID
 
-from device import IDeviceRepository
-from device.models import Device
-from device.repositories.mappers import DeviceMapper
+from ...models import Device
+from ..mappers import DeviceMapper
+from ..interface import IDeviceRepository
 
 
 __all__ = ("DjangoDeviceRepository",)
