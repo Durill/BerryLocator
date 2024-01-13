@@ -1,7 +1,9 @@
 from datetime import datetime
-from uuid import uuid4
+from uuid import UUID
 
-from device import DjangoDeviceRepository, Device, DeviceKind
+from core import ResourceConflict, ResourceNotFound
+from ..models import Device, DeviceKind, DeviceStatus
+from ..repositories import IDeviceRepository
 
 __all__ = ("DeviceCreateCommand",)
 
@@ -9,21 +11,37 @@ __all__ = ("DeviceCreateCommand",)
 class DeviceCreateCommand:
     def __init__(
         self,
-        device_repository: DjangoDeviceRepository
+        device_repository: IDeviceRepository
     ):
         self.device_repository = device_repository
 
-    def execute(self, device_name: str, device_kind: DeviceKind) -> Device:
+    def execute(
+        self,
+        device_id: UUID,
+        device_name: str,
+        device_kind: DeviceKind,
+    ) -> Device:
+
+        if self.device_repository.get(device_id=device_id) is not None:
+            raise ResourceConflict(
+                resource_kind="Device",
+                resource_id=device_id,
+                message="Device with given ID has been already registered"
+            )
+
+        if device_kind not in DeviceKind.all_values():
+            raise ResourceNotFound(
+                resource_kind="DeviceKind",
+                message="There is no such kind of device in our system"
+            )
+
         device = Device(
-            id=uuid4(),
+            id=device_id,
             name=device_name,
-            kind=device_kind.value,
+            kind=device_kind,
+            status=DeviceStatus.NOT_VERIFIED,
             bind_timestamp=datetime.now(),
-            unbind_timestamp=datetime.now(),
         )
 
-        try:
-            self.device_repository.create(device=device)
-            return device
-        except Exception as error:
-            print(error)
+        self.device_repository.create(device=device)
+        return device
