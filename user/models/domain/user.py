@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 from uuid import UUID
-from user import Password
+from ..value_objects import Password
 
 __all__ = ("User",)
 

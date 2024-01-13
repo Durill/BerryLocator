@@ -2,7 +2,7 @@ from datetime import datetime
 from uuid import UUID
 
 from ..models import Device, DeviceKind, DeviceStatus
-from ..repositories import DjangoDeviceRepository
+from ..repositories import IDeviceRepository
 
 __all__ = ("DeviceCreateCommand",)
 
@@ -10,7 +10,7 @@ __all__ = ("DeviceCreateCommand",)
 class DeviceCreateCommand:
     def __init__(
         self,
-        device_repository: DjangoDeviceRepository
+        device_repository: IDeviceRepository
     ):
         self.device_repository = device_repository
 

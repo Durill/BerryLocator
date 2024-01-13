@@ -1,16 +1,17 @@
-from uuid import uuid4
+from uuid import uuid4, UUID
 
-from assignment import Assignment, DjangoAssignmentRepository
-from device import Device, DjangoDeviceRepository
-from user import User, DjangoUserRepository
+from ..models import Assignment
+from ..repositories import IAssignmentRepository
+from device import IDeviceRepository
+from user import IUserRepository
 
 
 class AssignmentCreateCommand:
     def __init__(
         self,
-        assignment_repository: DjangoAssignmentRepository,
-        device_repository: DjangoDeviceRepository,
-        user_repository: DjangoUserRepository,
+        assignment_repository: IAssignmentRepository,
+        device_repository: IDeviceRepository,
+        user_repository: IUserRepository,
     ):
         self.assignment_repository = assignment_repository
         self.device_repository = device_repository
@@ -18,15 +19,17 @@ class AssignmentCreateCommand:
 
     def execute(
         self,
-        user: User,
-        device: Device,
+        user_email: str,
+        device_id: UUID,
     ) -> Assignment:
 
-        if not self.user_repository.get_by_email(user_email=user.email):
+        user = self.user_repository.get_by_email(user_email=user_email)
+        if not user:
             print("User with given email not found #404")
             raise Exception
 
-        if not self.device_repository.get(device_id=device.id):
+        device = self.device_repository.get(device_id=device_id)
+        if not device:
             print("Device with given id not found #404")
             raise Exception
 

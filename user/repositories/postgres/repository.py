@@ -1,7 +1,9 @@
 from typing import Optional
 from uuid import UUID
 
-from user import IUserRepository, User, UserMapper
+from ...models import User
+from ..mappers import UserMapper
+from ..interface import IUserRepository
 
 __all__ = ("DjangoUserRepository",)
 
@@ -18,7 +20,7 @@ class DjangoUserRepository(IUserRepository):
 
     def get_by_email(self, user_email: str) -> Optional[User]:
         try:
-            user = self.__model__.objects.get(email=user_email)
+            user = self.__model__.objects.get(id=user_email)
             user = UserMapper.to_domain(user_model=user)
             return user if user else None
         except Exception as error:

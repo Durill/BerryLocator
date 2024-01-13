@@ -3,7 +3,7 @@ from typing import Optional
 from uuid import UUID
 
 from BerryDjangoSite.models.assignment import AssignmentModel
-from assignment import Assignment
+from ..models import Assignment
 
 __all__ = ("IAssignmentRepository",)
 

@@ -1,7 +1,10 @@
 from typing import Optional
 from uuid import UUID
 
-from assignment import IAssignmentRepository, Assignment, AssignmentMapper
+from ...models import Assignment
+from ..mappers import AssignmentMapper
+from ..interface import IAssignmentRepository
+
 
 __all__ = ("DjangoAssignmentRepository",)
 

@@ -1,13 +1,14 @@
 from datetime import datetime
 from uuid import uuid4
 
-from user import Password, User, DjangoUserRepository
+from ..models import User, Password
+from ..repositories import IUserRepository
 
 __all__ = ("UserCreateCommand",)
 
 
 class UserCreateCommand:
-    def __init__(self, user_repository: DjangoUserRepository):
+    def __init__(self, user_repository: IUserRepository):
         self.user_repository = user_repository
 
     def execute(
