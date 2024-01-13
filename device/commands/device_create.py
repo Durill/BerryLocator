@@ -1,6 +1,7 @@
 from datetime import datetime
 from uuid import UUID
 
+from core import ResourceConflict, ResourceNotFound
 from ..models import Device, DeviceKind, DeviceStatus
 from ..repositories import IDeviceRepository
 
@@ -22,12 +23,17 @@ class DeviceCreateCommand:
     ) -> Device:
 
         if self.device_repository.get(device_id=device_id) is not None:
-            print("This device has already been registered")
-            raise Exception
+            raise ResourceConflict(
+                resource_kind="Device",
+                resource_id=device_id,
+                message="Device with given ID has been already registered"
+            )
 
         if device_kind not in DeviceKind.all_values():
-            print("** What kind of shit is this? **")
-            raise Exception
+            raise ResourceNotFound(
+                resource_kind="DeviceKind",
+                message="There is no such kind of device in our system"
+            )
 
         device = Device(
             id=device_id,
@@ -37,8 +43,5 @@ class DeviceCreateCommand:
             bind_timestamp=datetime.now(),
         )
 
-        try:
-            self.device_repository.create(device=device)
-            return device
-        except Exception as error:
-            print(error)
+        self.device_repository.create(device=device)
+        return device

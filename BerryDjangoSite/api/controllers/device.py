@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 
 from container import container
+from core import ResourceNotFound, ResourceConflict
 from device import DeviceKind, DeviceCreateCommand
 from assignment import AssignmentCreateCommand
 
@@ -47,5 +48,8 @@ def register_device(request):
             },
             status=status.HTTP_201_CREATED
         )
-    except Exception as error:
-        print(error)
+
+    except ResourceNotFound as error:
+        return JsonResponse(data=error.as_dict, status=status.HTTP_404_NOT_FOUND)
+    except ResourceConflict as error:
+        return JsonResponse(data=error.as_dict, status=status.HTTP_409_CONFLICT)
