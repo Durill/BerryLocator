@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Optional
 from uuid import UUID
 
-from BerryDjangoSite.models import UserModel
+from berry_site.user.models import UserModel
 from user import User
 
 __all__ = ("IUserRepository",)

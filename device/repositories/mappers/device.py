@@ -1,7 +1,8 @@
 from uuid import UUID
 
-from ...models import Device, DeviceStatus, DeviceKind
-from BerryDjangoSite.models import DeviceModel
+from berry_site.device.models import DeviceModel
+
+from ...models import Device, DeviceKind, DeviceStatus
 
 __all__ = ("DeviceMapper",)
 

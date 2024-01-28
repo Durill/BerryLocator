@@ -1,9 +1,9 @@
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
 from uuid import UUID
-from dataclasses import dataclass
-from ..value_objects import DeviceKind, DeviceStatus
 
+from ..value_objects import DeviceKind, DeviceStatus
 
 __all__ = ("Device",)
 

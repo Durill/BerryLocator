@@ -1,9 +1,10 @@
 from uuid import UUID
 
-from BerryDjangoSite.models.assignment import AssignmentModel
-from ...models import Assignment
+from berry_site.assignment.models import AssignmentModel
 from device import DeviceMapper
 from user import UserMapper
+
+from ...models import Assignment
 
 __all__ = ("AssignmentMapper",)
 
