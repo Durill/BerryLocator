@@ -1,7 +1,7 @@
 from uuid import UUID
 
 from BerryDjangoSite.models.assignment import AssignmentModel
-from ...models import Assignment
+from ...models import Assignment, AssignmentStatus
 from device import DeviceMapper
 from user import UserMapper
 
@@ -15,6 +15,7 @@ class AssignmentMapper:
             id=assignment.id,
             user=UserMapper.from_domain(user=assignment.user),
             device=DeviceMapper.from_domain(device=assignment.device),
+            status=assignment.status
         )
 
     @classmethod
@@ -23,4 +24,5 @@ class AssignmentMapper:
             id=UUID(assignment_model.id),
             user=UserMapper.to_domain(user_model=assignment_model.user),
             device=DeviceMapper.to_domain(device_model=assignment_model.device),
+            status=AssignmentStatus(assignment_model.status)
         )

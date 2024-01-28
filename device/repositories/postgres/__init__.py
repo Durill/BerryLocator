@@ -1,1 +1,1 @@
-from .repository import *
+from .devices import *

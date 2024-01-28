@@ -21,13 +21,11 @@ def register_device(request):
     device_name = request.data['device_name']
     user_email = request.data['user_email']
 
-    device_repository = container.device_repository
-
-    device = DeviceCreateCommand(device_repository=device_repository)
+    device = DeviceCreateCommand(device_repository=container.device_repository)
 
     assignment = AssignmentCreateCommand(
         assignment_repository=container.assignment_repository,
-        device_repository=device_repository,
+        device_repository=container.device_repository,
         user_repository=container.user_repository,
     )
 
@@ -53,3 +51,32 @@ def register_device(request):
         return JsonResponse(data=error.as_dict, status=status.HTTP_404_NOT_FOUND)
     except ResourceConflict as error:
         return JsonResponse(data=error.as_dict, status=status.HTTP_409_CONFLICT)
+
+
+@api_view(http_method_names=['POST'])
+def save_trip(request):
+    token = request.data['token']
+    geometry = request.data['geometry']
+
+    localization = LocalizationSaveCommand(
+        localization_repository=container.localization_repository,
+        device_repository=device_repository,
+        user_repository=container.user_repository,
+    )
+
+    try:
+        localization.execute(
+            device_id=device_id,
+            user_email=user_email,
+            geometry=geometry,
+        )
+
+        return JsonResponse(
+            data={
+
+            },
+            status=status.HTTP_201_CREATED
+        )
+
+    except ResourceNotFound as error:
+        return JsonResponse(data=error.as_dict, status=status.HTTP_404_NOT_FOUND)

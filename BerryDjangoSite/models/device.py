@@ -16,7 +16,6 @@ class DeviceModel(models.Model):
     unbind_timestamp = models.DateTimeField(null=True)
     # created_at = models.DateTimeField()
     # updated_at = models.DateTimeField()
-    status = models.TextField()
 
 #
 # class DeviceTemporary(models.Model):

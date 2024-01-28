@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from ...models import Device, DeviceStatus, DeviceKind
+from ...models import Device, DeviceKind
 from BerryDjangoSite.models import DeviceModel
 
 __all__ = ("DeviceMapper",)
@@ -15,7 +15,6 @@ class DeviceMapper:
             kind=device.kind,
             bind_timestamp=device.bind_timestamp,
             unbind_timestamp=device.unbind_timestamp,
-            status=device.status,
         )
 
     @classmethod
@@ -26,5 +25,4 @@ class DeviceMapper:
             kind=DeviceKind(device_model.kind),
             bind_timestamp=device_model.bind_timestamp,
             unbind_timestamp=device_model.unbind_timestamp,
-            status=DeviceStatus(device_model.status),
         )
