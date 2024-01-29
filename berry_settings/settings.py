@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'berry_site.core',
     'berry_site.device',
     'berry_site.user',
+    'berry_site.trip',
     'rest_framework',
 ]
 
