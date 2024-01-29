@@ -2,7 +2,8 @@ from abc import ABC, abstractmethod
 from typing import Optional
 from uuid import UUID
 
-from BerryDjangoSite.models.assignment import AssignmentModel
+from berry_site.assignment.models import AssignmentModel
+
 from ..models import Assignment
 
 __all__ = ("IAssignmentRepository",)

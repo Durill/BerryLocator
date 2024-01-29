@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, Dict
+from typing import Dict, Optional
 from uuid import UUID
 
 from core import StrEnum
@@ -76,7 +76,7 @@ class ResourceError(Error):
         return f"""
             CODE: {self.INTERNAL_CODE.value},
             KIND: {self.resource_kind},
-            ID: {str(self.resource_id)},
+            ID: {self.resource_id},
             MESSAGE: {self.message}
         """
 

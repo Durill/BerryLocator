@@ -2,6 +2,7 @@ from datetime import datetime
 from uuid import UUID
 
 from core import ResourceConflict, ResourceNotFound
+
 from ..models import Device, DeviceKind, DeviceStatus
 from ..repositories import IDeviceRepository
 
@@ -9,10 +10,7 @@ __all__ = ("DeviceCreateCommand",)
 
 
 class DeviceCreateCommand:
-    def __init__(
-        self,
-        device_repository: IDeviceRepository
-    ):
+    def __init__(self, device_repository: IDeviceRepository):
         self.device_repository = device_repository
 
     def execute(
@@ -21,18 +19,16 @@ class DeviceCreateCommand:
         device_name: str,
         device_kind: DeviceKind,
     ) -> Device:
-
         if self.device_repository.get(device_id=device_id) is not None:
             raise ResourceConflict(
                 resource_kind="Device",
                 resource_id=device_id,
-                message="Device with given ID has been already registered"
+                message="Device with given ID has been already registered",
             )
 
         if device_kind not in DeviceKind.all_values():
             raise ResourceNotFound(
-                resource_kind="DeviceKind",
-                message="There is no such kind of device in our system"
+                resource_kind="DeviceKind", message="There is no such kind of device in our system"
             )
 
         device = Device(

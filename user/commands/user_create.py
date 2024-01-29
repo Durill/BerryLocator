@@ -2,7 +2,8 @@ from datetime import datetime
 from uuid import uuid4
 
 from core import ResourceConflict
-from ..models import User, Password
+
+from ..models import Password, User
 from ..repositories import IUserRepository
 
 __all__ = ("UserCreateCommand",)
@@ -19,11 +20,9 @@ class UserCreateCommand:
         first_name: str,
         last_name: str,
     ) -> User:
-
         if self.user_repository.get_by_email(user_email=email) is not None:
             raise ResourceConflict(
-                resource_kind="User",
-                message=f"User with given email: {email} already exist"
+                resource_kind="User", message=f"User with given email: {email} already exist"
             )
 
         now = datetime.now()

@@ -1,4 +1,4 @@
-from BerryDjangoSite.models import UserModel
+from berry_site.user.models import UserModel
 from user import User
 
 __all__ = ("UserMapper",)

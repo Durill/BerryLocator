@@ -1,5 +1,5 @@
-from .error import ResourceError, Error, ErrorCode
 from .codes import ResourceCodes
+from .error import Error, ErrorCode, ResourceError
 
 __all__ = (
     "UnexpectedError",

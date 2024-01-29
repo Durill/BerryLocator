@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Optional
 from uuid import UUID
 
-from BerryDjangoSite.models import DeviceModel
+from berry_site.device.models import DeviceModel
 from device import Device
 
 __all__ = ("IDeviceRepository",)

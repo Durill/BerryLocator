@@ -1,10 +1,11 @@
-from uuid import uuid4, UUID
+from uuid import UUID, uuid4
 
 from core import ResourceNotFound
-from ..models import Assignment
-from ..repositories import IAssignmentRepository
 from device import IDeviceRepository
 from user import IUserRepository
+
+from ..models import Assignment
+from ..repositories import IAssignmentRepository
 
 __all__ = ("AssignmentCreateCommand",)
 
@@ -25,12 +26,10 @@ class AssignmentCreateCommand:
         user_email: str,
         device_id: UUID,
     ) -> Assignment:
-
         user = self.user_repository.get_by_email(user_email=user_email)
         if not user:
             raise ResourceNotFound(
-                resource_kind="User",
-                message="User with given email does not exist"
+                resource_kind="User", message="User with given email does not exist"
             )
 
         device = self.device_repository.get(device_id=device_id)
@@ -38,7 +37,7 @@ class AssignmentCreateCommand:
             raise ResourceNotFound(
                 resource_kind="Device",
                 resource_id=device_id,
-                message="Device with given ID does not exist"
+                message="Device with given ID does not exist",
             )
 
         assignment = Assignment(
@@ -49,5 +48,3 @@ class AssignmentCreateCommand:
 
         self.assignment_repository.create(assignment=assignment)
         return assignment
-
-

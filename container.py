@@ -1,12 +1,11 @@
 from functools import cached_property
 
-from assignment import IAssignmentRepository, DjangoAssignmentRepository
-from device import IDeviceRepository, DjangoDeviceRepository
-from user import IUserRepository, DjangoUserRepository
+from assignment import DjangoAssignmentRepository, IAssignmentRepository
+from device import DjangoDeviceRepository, IDeviceRepository
+from user import DjangoUserRepository, IUserRepository
 
 
 class DIContainer:
-
     # USER
     @cached_property
     def user_repository(self) -> IUserRepository:
