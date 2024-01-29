@@ -11,14 +11,3 @@ class DeviceModel(models.Model):
     kind = models.CharField(max_length=255)
     bind_timestamp = models.DateTimeField()
     unbind_timestamp = models.DateTimeField(null=True)
-    # created_at = models.DateTimeField()
-    # updated_at = models.DateTimeField()
-    status = models.TextField()
-
-
-#
-# class DeviceTemporary(models.Model):
-#     id = models.CharField(primary_key=True)
-#     kind = models.CharField(max_length=255)
-#     email = models.CharField(max_length=100)
-#     expiration_date = models.DateTimeField()

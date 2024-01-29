@@ -3,7 +3,7 @@ from typing import Optional
 from uuid import UUID
 
 from berry_site.device.models import DeviceModel
-from device import Device
+from ..models import Device
 
 __all__ = ("IDeviceRepository",)
 

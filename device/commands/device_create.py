@@ -3,7 +3,7 @@ from uuid import UUID
 
 from core import ResourceConflict, ResourceNotFound
 
-from ..models import Device, DeviceKind, DeviceStatus
+from ..models import Device, DeviceKind
 from ..repositories import IDeviceRepository
 
 __all__ = ("DeviceCreateCommand",)
@@ -35,7 +35,6 @@ class DeviceCreateCommand:
             id=device_id,
             name=device_name,
             kind=device_kind,
-            status=DeviceStatus.NOT_VERIFIED,
             bind_timestamp=datetime.now(),
         )
 

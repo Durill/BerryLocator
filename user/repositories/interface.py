@@ -3,7 +3,7 @@ from typing import Optional
 from uuid import UUID
 
 from berry_site.user.models import UserModel
-from user import User
+from ..models import User
 
 __all__ = ("IUserRepository",)
 

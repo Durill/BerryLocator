@@ -2,7 +2,7 @@ from uuid import UUID
 
 from berry_site.device.models import DeviceModel
 
-from ...models import Device, DeviceKind, DeviceStatus
+from ...models import Device, DeviceKind
 
 __all__ = ("DeviceMapper",)
 
@@ -16,7 +16,6 @@ class DeviceMapper:
             kind=device.kind,
             bind_timestamp=device.bind_timestamp,
             unbind_timestamp=device.unbind_timestamp,
-            status=device.status,
         )
 
     @classmethod
@@ -27,5 +26,4 @@ class DeviceMapper:
             kind=DeviceKind(device_model.kind),
             bind_timestamp=device_model.bind_timestamp,
             unbind_timestamp=device_model.unbind_timestamp,
-            status=DeviceStatus(device_model.status),
         )

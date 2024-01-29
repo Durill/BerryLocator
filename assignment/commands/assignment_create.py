@@ -4,7 +4,7 @@ from core import ResourceNotFound
 from device import IDeviceRepository
 from user import IUserRepository
 
-from ..models import Assignment
+from ..models import Assignment, AssignmentStatus
 from ..repositories import IAssignmentRepository
 
 __all__ = ("AssignmentCreateCommand",)
@@ -44,6 +44,7 @@ class AssignmentCreateCommand:
             id=uuid4(),
             user=user,
             device=device,
+            status=AssignmentStatus.CONNECTED
         )
 
         self.assignment_repository.create(assignment=assignment)

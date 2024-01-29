@@ -1,1 +1,2 @@
-from .assignment import *
+from .value_objects import *
+from .domain import *
