@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from dataclasses import dataclass
 from typing import Union
 
 from enum import IntEnum
@@ -22,6 +24,7 @@ class SRID_EPSG(IntEnum):
         return f"EPSG:{enum.value}"
 
 
+@dataclass
 class Geometry:
     """
     Value of geometry is parsed from valid GeoJSON
@@ -51,3 +54,7 @@ class Geometry:
             raise  # Geometry not parsable
         except ShapelyError as error:
             raise  # Geometry not parsable from e
+
+        geometry = cls(value=shape, srid=geojson_srid)
+
+        return geometry
