@@ -2,6 +2,20 @@ volumes:
   berry_locator_postgres_data: { }
 
 services:
+  postgres:
+    image: berry_locator_postgres
+    build:
+      context: .
+      dockerfile: ./compose/postgres/Dockerfile
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: berry_locator
+    ports:
+      - "5432:5432"
+    volumes:
+      - berry_locator_postgres_data:/var/lib/postgresql/data
+
   django:
     image: berry_locator_django
     build:
@@ -11,19 +25,11 @@ services:
       - .:/app
     ports:
       - "8000:8000"
-    command: /start
+    command: ./compose/django/start
     depends_on:
       - postgres
       - mailhog
-  postgres:
-    image: berry_locator_postgres
-    build:
-      context: .
-      dockerfile: ./compose/postgres/Dockerfile
-    ports:
-      - "5432:5432"
-    volumes:
-      - berry_locator_postgres_data:/var/lib/postgresql/data
+
   mailhog:
     image: mailhog/mailhog:v1.0.0
     ports:
